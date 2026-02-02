@@ -6,7 +6,7 @@ import { Dashboard } from './pages/dashboard/dashboard';
   selector: 'app-root',
   imports: [RouterOutlet, Dashboard],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App {
   protected readonly title = signal('sterilizer-ui');

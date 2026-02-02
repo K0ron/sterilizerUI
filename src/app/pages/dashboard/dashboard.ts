@@ -9,6 +9,4 @@ import { Controls } from '../../components/controls/controls';
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })
-export class Dashboard {
-
-}
+export class Dashboard {}
