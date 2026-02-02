@@ -1,1 +1,11 @@
-<p>timer works!</p>
+<div
+  class="timer-circle"
+  [ngStyle]="{
+    '--progress': progress + '%',
+    '--progress-color': progressColor
+  }"
+>
+  <div class="inner">
+    <div class="value">{{ formatedTime }}</div>
+  </div>
+</div>
