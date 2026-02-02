@@ -1,0 +1,41 @@
+.temps-circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+
+  --progress: 0%;
+
+  background: conic-gradient(
+    var(--progress-color) 0% var(--progress),
+    #b7b7b7 var(--progress) 100%
+  );
+
+  transition: --progress 0.6s ease-in-out;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inner {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: #ffffff;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.value {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.target {
+  font-size: 1rem;
+  opacity: 0.7;
+}
