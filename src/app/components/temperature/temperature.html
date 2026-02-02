@@ -1,1 +1,9 @@
-<p>temperature works!</p>
+<div class="temps-circle"   [ngStyle]="{
+    '--progress': progress + '%',
+    '--progress-color': progressColor
+  }">
+    <div class="inner">
+        <div class="value">{{ currentTemperature }}°C</div>
+        <div class="target">{{ targetTemperature }}°C</div>
+    </div>
+</div>
