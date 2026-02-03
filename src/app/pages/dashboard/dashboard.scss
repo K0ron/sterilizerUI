@@ -1,7 +1,23 @@
 .dashboard-container {
-    height: 400px;
-    width: 700px;
-    display: flex;
-    flex-direction: column;
-    border : 1px solid black;
+  position: relative;
+  height: 400px;
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.controls {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  align-self: center;
+}
+
+.temperature,
+.timer {
+  margin-top: 75px;
 }

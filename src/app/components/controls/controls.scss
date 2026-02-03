@@ -1,0 +1,36 @@
+.controls-container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  justify-content: space-around;
+  align-items: end;
+}
+
+button {
+  height: 50px;
+  width: 80px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  border: none;
+  border-radius: 10%;
+}
+
+.start {
+  position: absolute;
+  bottom: 50%;
+  background-color: green;
+}
+
+.stop {
+  background-color: red;
+  margin-bottom: 40px;
+}
+
+.reset {
+  background-color: gray;
+  margin-bottom: 40px;
+}
