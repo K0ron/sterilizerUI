@@ -6,7 +6,9 @@
   }"
 >
   <div class="inner">
+    <button (click)="increaseTemp()">+</button>
     <div class="value">{{ currentTemperature }}°C</div>
     <div class="target">{{ targetTemperature }}°C</div>
+    <button (click)="decreaseTemp()">-</button>
   </div>
 </div>

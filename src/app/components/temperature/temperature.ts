@@ -13,6 +13,20 @@ export class Temperature implements OnInit {
 
   constructor(private cd: ChangeDetectorRef) {}
 
+  increaseTemp(): void {
+    if (this.targetTemperature < 150) {
+      this.targetTemperature += 5;
+      console.log(this.targetTemperature);
+    }
+  }
+
+  decreaseTemp(): void {
+    if (this.targetTemperature > 20) {
+      this.targetTemperature -= 5;
+    }
+    console.log(this.targetTemperature);
+  }
+
   ngOnInit(): void {
     // const interval = setInterval(() => {
     //   if (this.currentTemperature < this.targetTemperature) {

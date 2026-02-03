@@ -8,12 +8,16 @@ import { CommonModule } from '@angular/common';
   styleUrl: './timer.scss',
 })
 export class Timer implements OnInit {
-  totalTimeSec: number = 1000;
-  remainingTimeSec: number = 500;
-
   constructor(private cd: ChangeDetectorRef) {}
 
+  hours = 0;
+  minutes = 0;
+  totalTimeSec: number = 0;
+  remainingTimeSec: number = 0;
+  intervalId: any;
+
   ngOnInit(): void {
+    this.updateTotalTime();
     // const interval = setInterval(() => {
     //   if (this.remainingTimeSec > 0) {
     //     this.remainingTimeSec -= 1; // -1s à chaque tick
@@ -24,7 +28,42 @@ export class Timer implements OnInit {
     // }, 500);
   }
 
+  increaseMinutes(): void {
+    this.minutes += 5;
+
+    if (this.minutes >= 60) {
+      this.minutes = 0;
+      this.hours += 1;
+    }
+
+    this.updateTotalTime();
+  }
+
+  decreaseMinutes(): void {
+    this.minutes -= 5;
+
+    if (this.minutes < 0) {
+      if (this.hours > 0) {
+        this.hours--;
+        this.minutes = 55;
+      } else {
+        this.minutes = 0;
+      }
+    }
+    this.updateTotalTime();
+  }
+
+  updateTotalTime() {
+    this.totalTimeSec = this.hours * 3600 + this.minutes * 60;
+
+    if (!this.intervalId) {
+      this.remainingTimeSec = this.totalTimeSec;
+    }
+  }
+
   get progress(): number {
+    if (this.totalTimeSec === 0) return 0;
+
     return Math.min(((this.totalTimeSec - this.remainingTimeSec) / this.totalTimeSec) * 100, 100);
   }
 
@@ -41,8 +80,6 @@ export class Timer implements OnInit {
   }
 
   get progressColor(): string {
-    const ratio = this.remainingTimeSec / this.totalTimeSec;
-
     return '#b7b7b7';
   }
 }
