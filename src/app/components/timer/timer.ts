@@ -18,14 +18,6 @@ export class Timer implements OnInit {
 
   ngOnInit(): void {
     this.updateTotalTime();
-    // const interval = setInterval(() => {
-    //   if (this.remainingTimeSec > 0) {
-    //     this.remainingTimeSec -= 1; // -1s à chaque tick
-    //     this.cd.detectChanges(); // forcer la détection des changements
-    //   } else {
-    //     clearInterval(interval); // on arrête quand target atteinte
-    //   }
-    // }, 500);
   }
 
   increaseMinutes(): void {
@@ -81,5 +73,28 @@ export class Timer implements OnInit {
 
   get progressColor(): string {
     return '#b7b7b7';
+  }
+
+  start() {
+    console.log('TIMER STARTED');
+
+    if (this.intervalId) return;
+    if (this.totalTimeSec === 0) return;
+
+    this.intervalId = setInterval(() => {
+      if (this.remainingTimeSec > 0) {
+        this.remainingTimeSec--;
+        this.cd.detectChanges(); // Mettre à jour l'affichage du timer
+      } else {
+        this.stop();
+      }
+    }, 1000);
+  }
+
+  stop() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+      this.intervalId = null;
+    }
   }
 }

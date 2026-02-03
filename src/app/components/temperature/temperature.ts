@@ -1,5 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Timer } from '../timer/timer';
 
 @Component({
   selector: 'app-temperature',
@@ -8,8 +9,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './temperature.scss',
 })
 export class Temperature implements OnInit {
+  @Input() timer!: Timer;
+
   currentTemperature: number = 20;
   targetTemperature: number = 105;
+  tempsOk: boolean = false;
 
   constructor(private cd: ChangeDetectorRef) {}
 
@@ -27,16 +31,7 @@ export class Temperature implements OnInit {
     console.log(this.targetTemperature);
   }
 
-  ngOnInit(): void {
-    // const interval = setInterval(() => {
-    //   if (this.currentTemperature < this.targetTemperature) {
-    //     this.currentTemperature += 1; // +1°C à chaque tick
-    //     this.cd.detectChanges(); // forcer la détection des changements
-    //   } else {
-    //     clearInterval(interval); // on arrête quand target atteinte
-    //   }
-    // }, 500);
-  }
+  ngOnInit(): void {}
 
   get progress(): number {
     return Math.min((this.currentTemperature / this.targetTemperature) * 100, 100);
@@ -44,5 +39,25 @@ export class Temperature implements OnInit {
 
   get progressColor(): string {
     return this.currentTemperature < 50 ? '#00983f' : '#d42a17';
+  }
+
+  heatUp() {
+    const interval = setInterval(() => {
+      if (this.currentTemperature < this.targetTemperature) {
+        this.currentTemperature += 1;
+        this.cd.detectChanges(); // met à jour l'affichage
+      } else {
+        // température atteinte
+        this.tempsOk = true;
+        clearInterval(interval);
+
+        // lance le timer UNE SEULE FOIS
+        if (this.timer) {
+          console.log('temp OK');
+
+          this.timer.start();
+        }
+      }
+    }, 500);
   }
 }
