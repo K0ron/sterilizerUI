@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Temperature } from '../temperature/temperature';
 import { Timer } from '../timer/timer';
+import { SterilizerService } from '../../services/sterilizer-service';
 
 @Component({
   selector: 'app-controls',
@@ -9,18 +10,18 @@ import { Timer } from '../timer/timer';
   styleUrl: './controls.scss',
 })
 export class Controls implements OnInit {
-  @Input() temperature!: Temperature;
-  @Input() timer!: Timer;
-
-  constructor(private cd: ChangeDetectorRef) {}
+  constructor(private sterilizerService: SterilizerService) {}
   ngOnInit(): void {}
 
-  ngAfterViewInit() {
-    console.log('Temperature et Timer prêts', this.temperature, this.timer);
+  onStart() {
+    this.sterilizerService.start();
   }
 
-  onStart() {
-    // Démarre la montée de la température
-    this.temperature.heatUp();
+  emergency() {
+    this.sterilizerService.stopEmergency();
+  }
+
+  reset() {
+    this.sterilizerService.reset();
   }
 }
